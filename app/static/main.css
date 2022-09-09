@@ -1,0 +1,126 @@
+body {
+    background-color: grey;
+    background-image: url("https://wyliepalooza.com/wp-content/uploads/2019/05/background-wylie.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Kanit', sans-serif;
+}
+
+div {
+    margin: auto;
+    text-align: center;
+  }
+
+a .card {
+    margin: auto;
+    text-align: center;
+}
+
+.btn {
+    margin-top: 1rem;
+}
+
+.deleteBtn {
+  margin: 1rem;
+}
+
+.navbar {
+  background-color: #fffdd0;
+}
+
+h1{
+  color: white;
+  padding-top: 10px;
+}
+
+.noth1 a:hover{
+    color: rgb(222, 46, 189);
+}
+
+.noth1 a{
+    color: white;
+}
+
+h2 {
+    padding-top: 100px;
+    color: black;
+}
+
+
+h4 {
+  color: black;
+}
+
+li {
+  list-style: none;
+}
+
+.navbar a:hover {
+  color: rgb(98, 197, 224);
+}
+
+.deleted a:hover {
+  color: rgb(255, 255, 255);
+}
+
+.yelplink a:hover {
+    color: rgb(222, 46, 189);
+}
+
+a:link, a:visited {
+    color: black;
+    cursor: auto;
+  }
+
+.nav-link {
+  color: black;
+}
+
+.deleted {
+  font-size: larger;
+}
+
+.card-img-top {
+  margin-top: 10px;
+}
+
+.card-img-top-search {
+  margin: 10px;
+}
+
+.searchBtn {
+  margin: 10px;
+}
+
+.removeBtn {
+  margin-bottom: 10px;
+}
+
+.icecreamicon {
+  height: 50px;
+  width: 50px;
+}
+
+.search-card {
+  margin-top: 10px;
+}
+
+.nav-item {
+  font-size: larger;
+}
+
+.editprofile {
+  width: 400px;
+}
+
+.searchcontainer {
+  width: 400px;
+}
+
+.logincontainer {
+  width: 400px;
+}
+
+.signupcontainer {
+  width: 400px;
+}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h3>Sign Up</h3>
+    <form class="container signupcontainer" method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.username(class='form-control', placeholder='Username', autocomplete='off') }}
+        {{ form.email(class='form-control', placeholder='Email', autocomplete='off') }}
+        {{ form.password(class='form-control', placeholder='Password', autocomplete='off') }}
+        {{ form.confirm_password(class='form-control', placeholder='Confirm Password', autocomplete='off') }}
+        {{ form.submit(class='btn btn-success') }}
+    </form>
+
+{% endblock %}

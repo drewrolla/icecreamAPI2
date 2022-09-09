@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>Find New Flavors!</h1>
+    <form class="container searchcontainer" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.location(class='form-control', placeholder='Location', autocomplete='off') }}
+        {{ form.submit(class='btn btn-success') }}
+    </form>
+    {% if shops %}
+    <div class="card search-card" style="width: 18rem;">
+        <img src="{{ shops.img_url }}" class="card-img-top-search" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ shops.name.title() }}</h5>
+            <strong>Address: {{ shops.address }}</strong>
+            <p>Rating: {{ shops.rating }}</p>
+            <p class="yelplink"><a href="{{ shops.website }}">Check them out on Yelp!</a></p>
+        </div>
+        {% if saved %}
+            <a href="/remove/{{ shops.name }}" class="searchBtn btn btn-danger">Remove</a>
+        {% else %}
+            <a href="/save/{{ shops.name }}" class="searchBtn btn btn-success">Save</a>
+        {% endif %}
+    </div>
+    
+    {% endif %}
+{% endblock %}
