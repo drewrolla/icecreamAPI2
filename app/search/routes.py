@@ -25,10 +25,9 @@ def searchIceCream():
             # Define the parameters
             PARAMETERS = {
                 'location': location,
-                'categories': 'icecream,gelato, All',
+                'categories': 'icecream, all',
                 'radius': 10000,
-                'open_now': True,
-                'sort_by': 'best_match'
+                'sort_by': 'rating'
             }
             res = requests.get(url = ENDPOINT, params=PARAMETERS, headers=API_AUTH)
             if res.ok:
@@ -38,20 +37,23 @@ def searchIceCream():
                         'name': each['name'],
                         'rating': each['rating'],
                         'address': each['location']['address1'],
+                        'location': each['location']['city'],
+                        'state': each['location']['state'],
+                        'zipcode': each['location']['zip_code'],
                         'img_url': each['image_url'],
                         'website': each['url']
                     }
-                try:
-                    shops = Icecream.query.filter_by(name=my_dict['name']).first()
-                    if not shops:
-                        shops = Icecream(my_dict['name'], my_dict['rating'], my_dict['address'], my_dict['img_url'], my_dict['website'])
-                        shops.save()
-                    if current_user.shop.filter_by(name=shops.name).first():
-                        saved = True
-                except KeyError:
-                    flash("Sorry, we couldn't find anything for this location!", 'danger')
-            else:
+            try:
+                shops = Icecream.query.filter_by(name=my_dict['name']).first()
+                if not shops:
+                    shops = Icecream(my_dict['name'], my_dict['rating'], my_dict['address'], my_dict['location'], my_dict['state'], my_dict['zipcode'], my_dict['img_url'], my_dict['website'])
+                    shops.save()
+                if current_user.shop.filter_by(name=shops.name).first():
+                    saved = True
+            except KeyError:
                 flash("Sorry, we couldn't find anything for this location!", 'danger')
+        else:
+            flash("Sorry, we couldn't find anything for this location!", 'danger')
     return render_template('icecreamsearch.html', form=form, shops=my_dict, saved=saved)
 
 
