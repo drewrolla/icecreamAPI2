@@ -16,6 +16,7 @@ API_AUTH = {'Authorization': 'bearer %s' % API_KEY}
 def searchIceCream():
     form = IceCreamSearchForm()
     my_dict = {}
+    icecreamShops = []
     saved = False
     if request.method == "POST":
         print('Post request made.')
@@ -27,7 +28,8 @@ def searchIceCream():
                 'location': location,
                 'categories': 'icecream, all',
                 'radius': 10000,
-                'sort_by': 'rating'
+                'sort_by': 'rating',
+                'limit': 5
             }
             res = requests.get(url = ENDPOINT, params=PARAMETERS, headers=API_AUTH)
             if res.ok:
@@ -43,18 +45,19 @@ def searchIceCream():
                         'img_url': each['image_url'],
                         'website': each['url']
                     }
-            try:
-                shops = Icecream.query.filter_by(name=my_dict['name']).first()
-                if not shops:
-                    shops = Icecream(my_dict['name'], my_dict['rating'], my_dict['address'], my_dict['location'], my_dict['state'], my_dict['zipcode'], my_dict['img_url'], my_dict['website'])
-                    shops.save()
-                if current_user.shop.filter_by(name=shops.name).first():
-                    saved = True
-            except KeyError:
-                flash("Sorry, we couldn't find anything for this location!", 'danger')
+                    icecreamShops.append(my_dict)
+            # try:
+            #     shops = Icecream.query.filter_by(name=shops.name).all()
+            #     if not shops:
+            #         shops = Icecream(my_dict['name'], my_dict['rating'], my_dict['address'], my_dict['location'], my_dict['state'], my_dict['zipcode'], my_dict['img_url'], my_dict['website'])
+            #         shops.save()
+            #     if current_user.shop.filter_by(name=shops.name).first():
+            #         saved = True
+            # except KeyError:
+            #     flash("Sorry, we couldn't find anything for this location!", 'danger')
         else:
             flash("Sorry, we couldn't find anything for this location!", 'danger')
-    return render_template('icecreamsearch.html', form=form, shops=my_dict, saved=saved)
+    return render_template('icecreamsearch.html', form=form, shops=icecreamShops, saved=saved)
 
 
 @search.route('/saved', methods=["GET","POST"])

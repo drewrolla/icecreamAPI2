@@ -2,25 +2,31 @@
 {% block content %}
 
     <h1>Find New Flavors!</h1>
-    <form class="container searchcontainer" method="POST">
+    
+    <form class="container searchcontainer" method="POST" >
         {{ form.hidden_tag() }}
         {{ form.location(class='form-control', placeholder='Location', autocomplete='off') }}
         {{ form.submit(class='btn btn-success') }}
     </form>
     {% if shops %}
+    
+    <div class="row">
+        {% for shop in shops %}
             <div class="card search-card" style="width: 18rem;">
-                <img src="{{ shops.img_url }}" class="card-img-top-search" alt="...">
+                <img src="{{ shop.img_url }}" class="card-img-top-search" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">{{ shops.name.title() }}</h5>
-                    <strong>Address: {{ shops.address }}, {{ shops.location }}, {{ shops.state }} {{ shops.zipcode }}</strong>
-                    <p>Rating: {{ shops.rating }}</p>
-                    <p class="yelplink"><a href="{{ shops.website }}">Check them out on Yelp!</a></p>
+                    <h5 class="card-title">{{ shop.name.title() }}</h5>
+                    <strong>Address: {{ shop.address }}, {{ shop.location }}, {{ shop.state }} {{ shop.zipcode }}</strong>
+                    <p>Rating: {{ shop.rating }}</p>
+                    <p class="yelplink"><a href="{{ shop.website }}">Check them out on Yelp!</a></p>
                 </div>
                 {% if saved %}
-                    <a href="/remove/{{ shops.name }}" class="searchBtn btn btn-danger">Remove</a>
+                    <a href="/remove/{{ shop.name }}" class="searchBtn btn btn-danger">Remove</a>
                 {% else %}
-                    <a href="/save/{{ shops.name }}" class="searchBtn btn btn-success">Save</a>
+                    <a href="/save/{{ shop.name }}" class="searchBtn btn btn-success">Save</a>
                 {% endif %}
             </div>
+        {% endfor %}
+    </div>
     {% endif %}
 {% endblock %}
