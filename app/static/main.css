@@ -81,19 +81,21 @@ a:link, a:visited {
 }
 
 .card-img-top {
-  margin-top: 10px;
+  margin-top: 15px;
+  height: 200px;
 }
 
 .card-img-top-search {
-  margin: 10px;
+  margin: 15px;
+  height: 200px;
 }
 
 .searchBtn {
-  margin: 10px;
+  margin: 15px;
 }
 
 .removeBtn {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .icecreamicon {
