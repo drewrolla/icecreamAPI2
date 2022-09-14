@@ -65,8 +65,9 @@ class Icecream(db.Model):
     zipcode = db.Column(db.String)
     img_url = db.Column(db.String)
     website = db.Column(db.String)
+    saved = db.Column(db.Boolean, default=False, nullable=False)
 
-    def __init__(self, name, rating,  address, location, state, zipcode, img_url, website):
+    def __init__(self, name, rating,  address, location, state, zipcode, img_url, website, saved):
         self.name = name
         self.rating = rating
         self.address = address
@@ -75,6 +76,7 @@ class Icecream(db.Model):
         self.zipcode = zipcode
         self.img_url = img_url
         self.website = website
+        self.saved = saved
 
     def to_dict(self):
         return {
@@ -86,7 +88,8 @@ class Icecream(db.Model):
             'state': self.state,
             'zipcode': self.zipcode,
             'img_url': self.img_url,
-            'website': self.website
+            'website': self.website,
+            'saved': self.saved
         }
 
     def save(self):

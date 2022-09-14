@@ -43,16 +43,22 @@ def searchIceCream():
                         'state': each['location']['state'],
                         'zipcode': each['location']['zip_code'],
                         'img_url': each['image_url'],
-                        'website': each['url']
+                        'website': each['url'],
+                        'saved': False
                     }
                     icecreamShops.append(my_dict)
             try:
-                shops = Icecream.query.filter_by(name=my_dict['name']).first()
-                if not shops:
-                    shops = Icecream(my_dict['name'], my_dict['rating'], my_dict['address'], my_dict['location'], my_dict['state'], my_dict['zipcode'], my_dict['img_url'], my_dict['website'])
-                    shops.save()
-                if current_user.shop.filter_by(name=shops.name).first():
-                    saved = True
+                for icecream in icecreamShops: #for each thing in the list
+                    shops = Icecream.query.filter_by(name=icecream['name']).first() #shops is set to be the first thing that appears in our db
+                    if not shops: #if not already in db: add the following info for each shop to it
+                        shops = Icecream(icecream['name'], icecream['rating'], icecream['address'], icecream['location'], icecream['state'], icecream['zipcode'], icecream['img_url'], icecream['website'], icecream['saved'])
+                        shops.save() #save to db
+                    #current issue is save/remove button all showing the same result when one shop is saved
+                    # could write a loop and go through our db for each thing that is saved and change it, but that's slow
+                    # could also do if/else statements
+                    ######### following lines are based off of shoha's code
+                    # if current_user.shop.filter_by(id=icecream.id).first():
+                    #     saved = True
             except KeyError:
                 flash("Sorry, we couldn't find anything for this location!", 'danger')
         else:
@@ -68,8 +74,12 @@ def savedShops():
 # save ice cream shops
 @search.route('/save/<string:icecream_name>')
 def saveIceCream(icecream_name):
-    shops = Icecream.query.filter_by(name=icecream_name).all()
+    shops = Icecream.query.filter_by(name=icecream_name).first()
+    print('is saved??')
+    if not shops:
+        return redirect(url_for('search.searchIceCream'))
     current_user.shop.append(shops)
+    shops.saved=True
     db.session.commit()
     return redirect(url_for('search.savedShops'))
 
@@ -78,6 +88,7 @@ def saveIceCream(icecream_name):
 def removeIceCream(icecream_name):
     shops = Icecream.query.filter_by(name=icecream_name).first()
     current_user.shop.remove(shops)
+    shops.saved=False
     db.session.commit()
     return redirect(url_for('search.savedShops'))
 
