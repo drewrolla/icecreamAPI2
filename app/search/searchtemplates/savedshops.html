@@ -10,6 +10,7 @@
                 <h5 class="card-title">{{ s.name.title() }}</h5>
                 <strong>Address: {{ s.address }}, {{ s.location }} {{ s.state }} {{ s.zipcode }}</strong>
                 <p>Rating: {{ s.rating }}</p>
+                <p>Phone: {{ s.phone }}</p>
                 <p><a href="{{ s.website }}">Check them out on Yelp!</a></p>
             </div>
                 <a href="/remove/{{ s.name }}" class="removeBtn btn btn-danger">Remove</a>

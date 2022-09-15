@@ -42,6 +42,7 @@ def searchIceCream():
                         'location': each['location']['city'],
                         'state': each['location']['state'],
                         'zipcode': each['location']['zip_code'],
+                        'phone': each['phone'],
                         'img_url': each['image_url'],
                         'website': each['url'],
                         'saved': False
@@ -51,7 +52,7 @@ def searchIceCream():
                 for icecream in icecreamShops: #for each thing in the list
                     shops = Icecream.query.filter_by(name=icecream['name']).first() #shops is set to be the first thing that appears in our db
                     if not shops: #if not already in db: add the following info for each shop to it
-                        shops = Icecream(icecream['name'], icecream['rating'], icecream['address'], icecream['location'], icecream['state'], icecream['zipcode'], icecream['img_url'], icecream['website'], icecream['saved'])
+                        shops = Icecream(icecream['name'], icecream['rating'], icecream['address'], icecream['location'], icecream['state'], icecream['zipcode'], icecream['phone'], icecream['img_url'], icecream['website'], icecream['saved'])
                         shops.save() #save to db
                     #current issue is save/remove button all showing the same result when one shop is saved
                     # could write a loop and go through our db for each thing that is saved and change it, but that's slow

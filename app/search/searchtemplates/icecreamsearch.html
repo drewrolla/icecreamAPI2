@@ -18,6 +18,7 @@
                     <h5 class="card-title">{{ shop.name.title() }}</h5>
                     <strong>Address: {{ shop.address }}, {{ shop.location }}, {{ shop.state }} {{ shop.zipcode }}</strong>
                     <p>Rating: {{ shop.rating }}</p>
+                    <p>Phone: {{ shop.phone }}</p>
                     <p class="yelplink"><a href="{{ shop.website }}">Check them out on Yelp!</a></p>
                 </div>
                 {% if saved %}

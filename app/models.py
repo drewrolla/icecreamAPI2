@@ -63,17 +63,19 @@ class Icecream(db.Model):
     location = db.Column(db.String)
     state = db.Column(db.String)
     zipcode = db.Column(db.String)
+    phone = db.Column(db.String)
     img_url = db.Column(db.String)
     website = db.Column(db.String)
     saved = db.Column(db.Boolean, default=False, nullable=False)
 
-    def __init__(self, name, rating,  address, location, state, zipcode, img_url, website, saved):
+    def __init__(self, name, rating,  address, location, state, zipcode, phone, img_url, website, saved):
         self.name = name
         self.rating = rating
         self.address = address
         self.location = location
         self.state = state
         self.zipcode = zipcode
+        self.phone = phone
         self.img_url = img_url
         self.website = website
         self.saved = saved
@@ -87,6 +89,7 @@ class Icecream(db.Model):
             'location': self.location,
             'state': self.state,
             'zipcode': self.zipcode,
+            'phone': self.phone,
             'img_url': self.img_url,
             'website': self.website,
             'saved': self.saved

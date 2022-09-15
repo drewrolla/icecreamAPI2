@@ -23,7 +23,7 @@ def logMeIn():
                     login_user(user)
                     return redirect(url_for('search.searchIceCream'))
             else:
-                flash('Incorrect password', 'danger')
+                flash('Incorrect username or password.', 'danger')
         else:
             flash('Account does not exist.', 'danger')
     return render_template('login.html', form=form)
